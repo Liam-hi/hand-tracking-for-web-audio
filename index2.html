@@ -36,24 +36,29 @@
             flex-direction: column;
             height: 100%;
             width: 300px;
+            gap: 4px;
         }
 
         .canvas {
+            display: flex;
+            justify-content: center;
             height: 100%;
             width: 85%;
+            
         }
 
         h1, p {
             font-size: 1rem;
+            padding-left: 12px;
         }
 
         .container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: 5%;
+            justify-content: flex-start;
+            gap: 6px;
             width: 100%;
-            /* border-bottom: 1px solid grey; */
+           /*  border-bottom: 1px solid grey; */
         }
     </style>
 </head>
@@ -64,19 +69,9 @@
         <div class="container">
             <p>Effect on/off</p>
             <input type="checkbox" id="dist">
-            <p>Controlled by</p>
-            <select name="distortion" id="optdist">
-                <option value="thumb">Thumb</option>
-                <option value="index">Index</option>
-                <option value="middle">Middle</option>
-                <option value="ring">Ring</option>
-            </select>
         </div>
-        <h1>Reverb</h1>
         <div class="container">
-            <p>Effect on/off</p>
-            <input type="checkbox" id="reverb">
-            <p>Controlled by</p>
+            <p>Distortion controlled by</p>
             <select name="distortion" id="optdist">
                 <option value="thumb">Thumb</option>
                 <option value="index">Index</option>
@@ -85,6 +80,43 @@
             </select>
         </div>
         <hr>
+        <h1>Reverb</h1>
+        <div class="container">
+            <p>Effect on/off</p>
+            <input type="checkbox" id="reverb">
+        </div>
+        <div class="container">
+            <p>Room size controlled by</p>
+            <select name="distortion" id="optdist">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
+        <div class="container">
+            <p>Dampening controlled by</p>
+            <select name="distortion" id="optdist">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
+        
+        <hr>
+        <h1>Reverb</h1>
+        <div class="container">
+            <p>Effect on/off</p>
+            <input type="checkbox" id="reverb">
+            <p>Room size controlled by</p>
+            <select name="reverb" id="optreverb">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
 
  
         
@@ -104,12 +136,7 @@
     
 
     
-            <select name="reverb" id="optreverb">
-                <option value="thumb">Thumb</option>
-                <option value="index">Index</option>
-                <option value="middle">Middle</option>
-                <option value="ring">Ring</option>
-            </select>
+
     </div>
     <div class="canvas">
         <canvas class="output_canvas" width="1280px" height="720px"></canvas>
