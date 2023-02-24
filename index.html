@@ -1,0 +1,178 @@
+<head>
+    <!-- Include Handsfree.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.0.0"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+        .input_video {
+            display: none;
+        }
+    </style>
+  </head>
+   
+  <body>
+      <input type="checkbox" class="checkbox">
+      <button onclick="start()">jsjsjs</button>
+
+<!--       <audio controls id="myAudioElement">
+        <source src="1.mp3" type="audio/mp3">
+
+      </audio>  -->
+
+      
+    <video class="input_video"> controls>
+        <source src="1.mp4" type="video/mp4">
+      </video> 
+      <div id="slidecontainer">
+          x:
+        <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange">
+        <br>
+       y:  <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange2">
+      </div>
+      <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.4.9/Tone.min.js"></script>
+      <script>
+      const reverb = new Tone.JCReverb(0.4).toMaster();
+            const delay = new Tone.FeedbackDelay(0.5);
+            const synth = new Tone.Synth().chain(delay, reverb);
+
+            const synthAM = new Tone.AMSynth().toMaster();
+
+        
+
+
+          function start() {
+
+
+
+/*             const autoWah = new Tone.AutoWah(50, 6, -30).toMaster();
+            const player = new Tone.Player("1.mp3").connect(autoWah);
+            player.autostart = true; */
+            
+
+
+    /*         const filter = new Tone.Filter(1500, "highpass").toMaster();
+            filter.frequency.rampTo(20000, 10);
+            const player = new Tone.Player("1.mp3").connect(filter);
+
+            player.autostart = true; */
+      
+
+      
+
+
+
+     
+
+
+
+
+
+            const videoElement = document.getElementsByClassName('input_video')[0];
+            const canvasElement = document.getElementsByClassName('output_canvas')[0];
+            const canvasCtx = canvasElement.getContext('2d');
+
+            function values() {
+
+            }
+            
+            function onResults(results) {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(
+                results.image, 0, 0, canvasElement.width, canvasElement.height);
+            if (results.multiHandLandmarks) {
+                for (const landmarks of results.multiHandLandmarks) {
+                    drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+                    {color: '#00FF00', lineWidth: 4});
+                    drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+
+                    console.log(landmarks[12]);
+                    document.getElementById("myRange").value = landmarks[4].x; 
+                    document.getElementById("myRange2").value = landmarks[4].y; 
+                    /* autoWah.Q.value = landmarks[4].y * 20; */
+
+                    // make and start a 440hz sine tone
+
+                    
+                    
+                    
+
+/*                     if (landmarks[20].x < 0) {
+                        synth.triggerAttackRelease("C4", "2n");
+                    }
+                    if (landmarks[20].x > 0 && landmarks[20].x > 0.2 ) {
+                        synth.triggerAttackRelease("E4", "2n");
+                    }
+                    if (landmarks[20].x > 0.4 && landmarks[20].x > 0.5 ) {
+
+                        synth.triggerAttackRelease("B4", "2n");
+                    }
+                    if (landmarks[20].x > 0.5 && landmarks[20].x > 0.6 ) {
+           
+                        synth.triggerAttackRelease("E3", "2n");
+                    }
+
+                    if (landmarks[1].x < 0) {
+                        synth.triggerAttackRelease("C4", "2n");
+                    }
+                    if (landmarks[1].x > 0 && landmarks[1].x > 0.2 ) {
+                        synth.triggerAttackRelease("E4", "2n");
+                    }
+                    if (landmarks[1].x > 0.4 && landmarks[1].x > 0.5 ) {
+
+                        synth.triggerAttackRelease("B4", "2n");
+                    }
+                    if (landmarks[1].x > 0.5 && landmarks[1].x > 0.6 ) {
+           
+                        synth.triggerAttackRelease("E3", "2n");
+                    } */
+
+
+                }
+            
+            }
+            canvasCtx.restore();
+            
+            }
+            
+            const hands = new Hands({locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+            }});
+            hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+            });
+            hands.onResults(onResults);
+
+
+            async function onFrame() {
+                if (!videoElement.paused && !videoElement.ended) {
+                    await hands.send({
+                    image: videoElement
+                    });
+                // https://stackoverflow.com/questions/65144038/how-to-use-requestanimationframe-with-promise    
+                    await new Promise(requestAnimationFrame);
+                    onFrame();
+                } else
+                    setTimeout(onFrame, 500);
+                }
+            
+                videoElement.src = "./1.mp4"; 
+                videoElement.onloadeddata = (evt) => {
+                    let video = evt.target;
+                    canvasElement.width = video.videoWidth;
+                    canvasElement.height = video.videoHeight;
+                    videoElement.play();
+                    onFrame();
+                }
+            }
+        </script>
+  </body>
+  

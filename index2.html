@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.4.9/Tone.min.js"></script>
+    <style>
+        .input_video {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="dist">
+    <input type="checkbox" id="reverb">
+    <input type="checkbox" id="pitch">
+    <input type="checkbox" id="autowah">
+    <button onclick="objectTracking()">jsjsjs</button>
+    <video class="input_video"> controls>
+        <source src="1.mp4" type="video/mp4">
+      </video> 
+      <div id="slidecontainer">
+          x:
+        <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange">
+        <br>
+       y:  <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange2">
+      </div>
+
+
+      <select name="distortion" id="optdist">
+        <option value="thumb">Thumb</option>
+        <option value="index">Index</option>
+        <option value="middle">Middle</option>
+        <option value="ring">Ring</option>
+        </select>
+
+        <select name="reverb" id="optreverb">
+            <option value="thumb">Thumb</option>
+            <option value="index">Index</option>
+            <option value="middle">Middle</option>
+            <option value="ring">Ring</option>
+            </select>
+      <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+      <script>
+
+        
+      </script>
+      <script src="main.js"></script>
+</body>
+</html>
+
+
