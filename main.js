@@ -79,8 +79,6 @@ function objectTracking() {
                         distVal = landmarks[16].x;
                     }
 
-                    console.log(distVal);
-
                     if (optreverb.value == "thumb") {
                         reverbVal = landmarks[4].x;
                     }
@@ -94,20 +92,23 @@ function objectTracking() {
                         reverbVal = landmarks[16].x;
                      }
 
-                    /* thumpTip = landmarks[4]; */
-                    /* val(thumpTip); */
+                     console.log(reverbVal);
+
+/*                     thumpTip = landmarks[4];
+                    val(thumpTip); */
                     if (addDist.checked) {
                         console.log("Activated")
-                        dist.distortion = distFinger * 10;
+                        dist.distortion = distVal * 10;
                     }
                     else {
                         dist.distortion = 0;
                     }
+
                 
                     if (addReverb.checked) {
                         console.log("Activated")
                         freeverb.roomSize.value = 1;
-                        freeverb.dampening.value = thumpTip.x * 500;
+                        freeverb.dampening.value = reverbVal * 500;
                         freeverb.wet.value = 1;
                     }
                     else {
