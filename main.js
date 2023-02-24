@@ -11,6 +11,9 @@ let addAutoWah = document.getElementById('autowah');
 let optdist = document.getElementById('optdist');
 let optreverb = document.getElementById('optreverb');
 
+// Reset sliders
+document.getElementById("distrange").value =  0; 
+
 
 function val(thumpTip) {
     document.getElementById("myRange").value =  thumpTip.x; 
@@ -65,7 +68,6 @@ function objectTracking() {
                     drawLandmarks(canvasCtx, landmarks, {color: '#ffffff', lineWidth: 2});
 
 
-
                    if (optdist.value == "thumb") {
                        distVal = landmarks[4].x;
                    }
@@ -78,6 +80,7 @@ function objectTracking() {
                     if (optdist.value == "ring") {
                         distVal = landmarks[16].x;
                     }
+
 
                     if (optreverb.value == "thumb") {
                         reverbVal = landmarks[4].x;
@@ -99,9 +102,11 @@ function objectTracking() {
                     if (addDist.checked) {
                         console.log("Activated")
                         dist.distortion = distVal * 10;
+                        document.getElementById("distrange").value =  distVal; 
                     }
                     else {
                         dist.distortion = 0;
+                        document.getElementById("distrange").value =  0; 
                     }
 
                 
