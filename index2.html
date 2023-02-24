@@ -37,6 +37,8 @@
             height: 100%;
             width: 300px;
             gap: 4px;
+            padding-top: 12px;
+            padding-left: 12px;
         }
 
         .canvas {
@@ -49,7 +51,6 @@
 
         h1, p {
             font-size: 1rem;
-            padding-left: 12px;
         }
 
         .container {
@@ -60,6 +61,11 @@
             width: 100%;
            /*  border-bottom: 1px solid grey; */
         }
+        
+        hr.thin {
+            border-top: 1px solid whitesmoke;
+        }
+
     </style>
 </head>
 <body>
@@ -79,36 +85,13 @@
                 <option value="ring">Ring</option>
             </select>
         </div>
-        <hr>
+        <hr class="thin">
         <h1>Reverb</h1>
         <div class="container">
             <p>Effect on/off</p>
             <input type="checkbox" id="reverb">
         </div>
         <div class="container">
-            <p>Room size controlled by</p>
-            <select name="distortion" id="optdist">
-                <option value="thumb">Thumb</option>
-                <option value="index">Index</option>
-                <option value="middle">Middle</option>
-                <option value="ring">Ring</option>
-            </select>
-        </div>
-        <div class="container">
-            <p>Dampening controlled by</p>
-            <select name="distortion" id="optdist">
-                <option value="thumb">Thumb</option>
-                <option value="index">Index</option>
-                <option value="middle">Middle</option>
-                <option value="ring">Ring</option>
-            </select>
-        </div>
-        
-        <hr>
-        <h1>Reverb</h1>
-        <div class="container">
-            <p>Effect on/off</p>
-            <input type="checkbox" id="reverb">
             <p>Room size controlled by</p>
             <select name="reverb" id="optreverb">
                 <option value="thumb">Thumb</option>
@@ -117,6 +100,32 @@
                 <option value="ring">Ring</option>
             </select>
         </div>
+        <div class="container">
+            <p>Dampening controlled by</p>
+            <select name="reverb" id="optreverb">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
+        <hr class="thin">
+        <h1>Pitch Shift</h1>
+        <div class="container">
+            <p>Effect on/off</p>
+            <input type="checkbox" id="pitch">
+        </div>
+        <div class="container">
+            <p>Pitch shift controlled by</p>
+            <select name="distortion" id="optdist">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
+        <hr class="thin">
+
 
  
         
