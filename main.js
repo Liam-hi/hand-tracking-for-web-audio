@@ -2,11 +2,12 @@ let thumpTip;
 let addDist = document.getElementById('dist');
 let addReverb = document.getElementById('reverb');
 let addPitch = document.getElementById('pitch');
-let addAutoWah = document.getElementById('autowah');
+let addCrusher = document.getElementById('crusher');
 
 let optdist = document.getElementById('optdist');
 let optreverb = document.getElementById('optreverb');
 let optpitch = document.getElementById('optpitch');
+let optcrusher = document.getElementById('optcrusher');
 
 // Reset sliders
 document.getElementById("distrange").value = 0;
@@ -27,7 +28,7 @@ function val(thumpTip) {
 }
 
 
-let distVal, reverbVal, pitchVal;
+let distVal, reverbVal, pitchVal, crusherVal;
 
 
 function objectTracking() {
@@ -37,11 +38,13 @@ function objectTracking() {
     const dist = new Tone.Distortion(0).toMaster();
     const freeverb = new Tone.Freeverb(0, 0).toMaster();
     const pitchShift = new Tone.PitchShift(0).toMaster();
-    const autoWah = new Tone.AutoWah().toMaster();
+    const crusher = new Tone.BitCrusher(0).toMaster();
+
     player.connect(dist);
     player.connect(freeverb);
     player.connect(pitchShift);
-    player.connect(autoWah);
+    player.connect(crusher);
+
 
 
 
@@ -123,6 +126,19 @@ function objectTracking() {
                     pitchVal = landmarks[16].x;
                 }
 
+                if (optcrusher.value == "thumb") {
+                    crusherVal = landmarks[4].x;
+                }
+                if (optcrusher.value == "index") {
+                    crusherVal = landmarks[8].x;
+                }
+                if (optcrusher.value == "middle") {
+                    crusherVal = landmarks[12].x;
+                }
+                if (optcrusher.value == "ring") {
+                    crusherVal = landmarks[16].x;
+                }
+
 
 
                 /*                     thumpTip = landmarks[4];
@@ -159,17 +175,18 @@ function objectTracking() {
                     pitchShift.wet.value = 0;
                     document.getElementById("pitchrange").value = 0;
                 }
-                if (addAutoWah.checked) {
+
+                if (addCrusher.checked) {
                     console.log("Activated")
-                    autoWah.octaves.value = 4 * thumpTip.x;
-                    autoWah.Q.value = thumpTip.x * 100;
-                    autoWah.gain.value = 10;
+                    crusher.bits = crusherVal * 2;
+                    crusher.wet.value = 1;
 
 
                 } else {
-                    autoWah.wet.value = 0;
+                    crusher.wet.value = 0;
+                
                 }
-
+             
 
 
 
