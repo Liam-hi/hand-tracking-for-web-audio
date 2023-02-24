@@ -16,39 +16,107 @@
         .input_video {
             display: none;
         }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .side-menu {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 300px;
+        }
+
+        .canvas {
+            height: 100%;
+            width: 85%;
+        }
+
+        h1, p {
+            font-size: 1rem;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 5%;
+            width: 100%;
+            /* border-bottom: 1px solid grey; */
+        }
     </style>
 </head>
 <body>
-    <input type="checkbox" id="dist">
-    <input type="checkbox" id="reverb">
-    <input type="checkbox" id="pitch">
-    <input type="checkbox" id="autowah">
-    <button onclick="objectTracking()">jsjsjs</button>
-    <video class="input_video"> controls>
-        <source src="1.mp4" type="video/mp4">
-      </video> 
-      <div id="slidecontainer">
-          x:
-        <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange">
-        <br>
-       y:  <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange2">
-      </div>
-
-
-      <select name="distortion" id="optdist">
-        <option value="thumb">Thumb</option>
-        <option value="index">Index</option>
-        <option value="middle">Middle</option>
-        <option value="ring">Ring</option>
-        </select>
-
-        <select name="reverb" id="optreverb">
-            <option value="thumb">Thumb</option>
-            <option value="index">Index</option>
-            <option value="middle">Middle</option>
-            <option value="ring">Ring</option>
+    <div class="side-menu">
+        <h1>Audio Effects</h1>
+        <h1>Distortion</h1>
+        <div class="container">
+            <p>Effect on/off</p>
+            <input type="checkbox" id="dist">
+            <p>Controlled by</p>
+            <select name="distortion" id="optdist">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
             </select>
-      <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+        </div>
+        <h1>Reverb</h1>
+        <div class="container">
+            <p>Effect on/off</p>
+            <input type="checkbox" id="reverb">
+            <p>Controlled by</p>
+            <select name="distortion" id="optdist">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
+        <hr>
+
+ 
+        
+        <input type="checkbox" id="pitch">
+        <input type="checkbox" id="autowah">
+        <button onclick="objectTracking()">jsjsjs</button>
+        <video class="input_video"> controls>
+            <source src="1.mp4" type="video/mp4">
+          </video> 
+          <div id="slidecontainer">
+              x:
+            <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange">
+            <br>
+           y:  <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange2">
+          </div>
+    
+    
+
+    
+            <select name="reverb" id="optreverb">
+                <option value="thumb">Thumb</option>
+                <option value="index">Index</option>
+                <option value="middle">Middle</option>
+                <option value="ring">Ring</option>
+            </select>
+    </div>
+    <div class="canvas">
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    </div>
+        
+
+
       <script>
 
         
