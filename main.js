@@ -9,6 +9,7 @@ let addPitch = document.getElementById('pitch');
 let addAutoWah = document.getElementById('autowah');
 
 let optdist = document.getElementById('optdist');
+let optreverb = document.getElementById('optreverb');
 
 
 function val(thumpTip) {
@@ -80,16 +81,16 @@ function objectTracking() {
 
                     console.log(distVal);
 
-                    if (optdist.value == "thumb") {
+                    if (optreverb.value == "thumb") {
                         reverbVal = landmarks[4].x;
                     }
-                    if (optdist.value == "index") {
+                    if (optreverb.value == "index") {
                         reverbVal = landmarks[8].x;
                      }
-                     if (optdist.value == "middle") {
+                     if (optreverb.value == "middle") {
                         reverbVal = landmarks[12].x;
                      }
-                     if (optdist.value == "ring") {
+                     if (optreverb.value == "ring") {
                         reverbVal = landmarks[16].x;
                      }
 
