@@ -18,6 +18,7 @@ document.getElementById("bitrange").value = 0;
 document.getElementById("delayrange").value = 0;
 
 function objectTracking() {
+    // Load audio file
     const player = new Tone.Player("1.mp3");
     player.autostart = true;
     const dist = new Tone.Distortion(0).toMaster();
@@ -26,20 +27,19 @@ function objectTracking() {
     const crusher = new Tone.BitCrusher(0).toMaster();
     const feedbackDelay = new Tone.FeedbackDelay().toMaster();
 
+    // connect is used to specify how audio data should flow from one node to the next. 
     player.connect(dist);
     player.connect(freeverb);
     player.connect(pitchShift);
     player.connect(crusher);
     player.connect(feedbackDelay);
 
-    // Prevent leaking sound
+    // Prevent sound leakage
     dist.wet.value = 0;
     freeverb.wet.value = 0;
     pitchShift.wet.value = 0;
     crusher.wet.value = 0;
     feedbackDelay.wet.value = 0;
-
-
 
     const videoElement = document.getElementsByClassName('input_video')[0];
     const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -137,7 +137,7 @@ function objectTracking() {
                 }
 
                 if (addDist.checked) {
-                    console.log("Activated")
+                    /* console.log("Activated") */
                     dist.distortion = distVal * 10;
                     document.getElementById("distrange").value = distVal;
                     dist.wet.value = 1;
@@ -147,7 +147,7 @@ function objectTracking() {
                     document.getElementById("distrange").value = 0;
                 }
                 if (addReverb.checked) {
-                    console.log("Activated")
+                    /* console.log("Activated") */
                     freeverb.roomSize.value = 1;
                     freeverb.dampening.value = reverbVal * 500;
                     freeverb.wet.value = 1;
@@ -158,7 +158,7 @@ function objectTracking() {
                     document.getElementById("reverbrange").value = 0;
                 }
                 if (addPitch.checked) {
-                    console.log("Activated")
+                    /* console.log("Activated") */
                     pitchShift.pitch = pitchVal * -12;
                     pitchShift.wet.value = 1;
                     document.getElementById("pitchrange").value = pitchVal;
@@ -167,7 +167,7 @@ function objectTracking() {
                     document.getElementById("pitchrange").value = 0;
                 }
                 if (addCrusher.checked) {
-                    console.log("Activated")
+                    /* console.log("Activated") */
                     crusher.bits = crusherVal * 2;
                     crusher.wet.value = 1;
                     document.getElementById("bitrange").value = crusherVal;
@@ -177,7 +177,7 @@ function objectTracking() {
                 }
 
                 if (addDelay.checked) {
-                    console.log("Activated")
+                    /* console.log("Activated") */
                     feedbackDelay.delayTime = "4n";
                     feedbackDelay.feedback = delayVal * 100;
                     feedbackDelay.wet.value = 1;
@@ -205,7 +205,7 @@ function objectTracking() {
     });
     hands.onResults(onResults);
 
-
+    // Use pre-recorded videos
     async function onFrame() {
         if (!videoElement.paused && !videoElement.ended) {
             await hands.send({
@@ -225,6 +225,4 @@ function objectTracking() {
         videoElement.play();
         onFrame();
     }
-
-
 }
