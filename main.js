@@ -1,51 +1,43 @@
-let thumpTip;
+let distVal, reverbVal, pitchVal, crusherVal, delayVal;
 let addDist = document.getElementById('dist');
 let addReverb = document.getElementById('reverb');
 let addPitch = document.getElementById('pitch');
 let addCrusher = document.getElementById('crusher');
-
+let addDelay = document.getElementById('delay');
 let optdist = document.getElementById('optdist');
 let optreverb = document.getElementById('optreverb');
 let optpitch = document.getElementById('optpitch');
 let optcrusher = document.getElementById('optcrusher');
+let optdelay = document.getElementById('optdelay');
 
 // Reset sliders
 document.getElementById("distrange").value = 0;
 document.getElementById("reverbrange").value = 0;
 document.getElementById("pitchrange").value = 0;
-
-
-function val(thumpTip) {
-    document.getElementById("myRange").value = thumpTip.x;
-    document.getElementById("myRange2").value = thumpTip.y;
-
-
-
-
-    /*     let checkbox = document.getElementById('checkbox');
-        console.log(checkbox.checked); */
-
-}
-
-
-let distVal, reverbVal, pitchVal, crusherVal;
-
+document.getElementById("bitrange").value = 0;
+document.getElementById("delayrange").value = 0;
 
 function objectTracking() {
     const player = new Tone.Player("1.mp3");
     player.autostart = true;
-
     const dist = new Tone.Distortion(0).toMaster();
     const freeverb = new Tone.Freeverb(0, 0).toMaster();
     const pitchShift = new Tone.PitchShift(0).toMaster();
     const crusher = new Tone.BitCrusher(0).toMaster();
+    const feedbackDelay = new Tone.FeedbackDelay().toMaster();
 
     player.connect(dist);
     player.connect(freeverb);
     player.connect(pitchShift);
     player.connect(crusher);
+    player.connect(feedbackDelay);
 
-
+    // Prevent leaking sound
+    dist.wet.value = 0;
+    freeverb.wet.value = 0;
+    pitchShift.wet.value = 0;
+    crusher.wet.value = 0;
+    feedbackDelay.wet.value = 0;
 
 
 
@@ -70,7 +62,6 @@ function objectTracking() {
                     lineWidth: 2
                 });
 
-
                 if (optdist.value == "thumb") {
                     distVal = landmarks[4].x;
                 }
@@ -83,8 +74,6 @@ function objectTracking() {
                 if (optdist.value == "ring") {
                     distVal = landmarks[16].x;
                 }
-
-
                 if (optreverb.value == "thumb") {
                     reverbVal = landmarks[4].x;
                 }
@@ -97,9 +86,6 @@ function objectTracking() {
                 if (optreverb.value == "ring") {
                     reverbVal = landmarks[16].x;
                 }
-
-                console.log(reverbVal);
-
                 if (optreverb.value == "thumb") {
                     reverbVal = landmarks[4].x;
                 }
@@ -112,7 +98,6 @@ function objectTracking() {
                 if (optreverb.value == "ring") {
                     reverbVal = landmarks[16].x;
                 }
-
                 if (optpitch.value == "thumb") {
                     pitchVal = landmarks[4].x;
                 }
@@ -125,7 +110,6 @@ function objectTracking() {
                 if (optpitch.value == "ring") {
                     pitchVal = landmarks[16].x;
                 }
-
                 if (optcrusher.value == "thumb") {
                     crusherVal = landmarks[4].x;
                 }
@@ -139,20 +123,29 @@ function objectTracking() {
                     crusherVal = landmarks[16].x;
                 }
 
+                if (optdelay.value == "thumb") {
+                    delayVal = landmarks[4].x;
+                }
+                if (optdelay.value == "index") {
+                    delayVal = landmarks[8].y;
+                }
+                if (optdelay.value == "middle") {
+                    delayVal = landmarks[12].x;
+                }
+                if (optdelay.value == "ring") {
+                    delayVal = landmarks[16].y;
+                }
 
-
-                /*                     thumpTip = landmarks[4];
-                                    val(thumpTip); */
                 if (addDist.checked) {
                     console.log("Activated")
                     dist.distortion = distVal * 10;
                     document.getElementById("distrange").value = distVal;
+                    dist.wet.value = 1;
                 } else {
                     dist.distortion = 0;
+                    dist.wet.value = 0;
                     document.getElementById("distrange").value = 0;
                 }
-
-
                 if (addReverb.checked) {
                     console.log("Activated")
                     freeverb.roomSize.value = 1;
@@ -164,38 +157,41 @@ function objectTracking() {
                     freeverb.wet.value = 0;
                     document.getElementById("reverbrange").value = 0;
                 }
-
                 if (addPitch.checked) {
                     console.log("Activated")
                     pitchShift.pitch = pitchVal * -12;
                     pitchShift.wet.value = 1;
                     document.getElementById("pitchrange").value = pitchVal;
-
                 } else {
                     pitchShift.wet.value = 0;
                     document.getElementById("pitchrange").value = 0;
                 }
-
                 if (addCrusher.checked) {
                     console.log("Activated")
                     crusher.bits = crusherVal * 2;
                     crusher.wet.value = 1;
-
-
+                    document.getElementById("bitrange").value = crusherVal;
                 } else {
                     crusher.wet.value = 0;
+                    document.getElementById("bitrange").value = 0;
+                }
+
+                if (addDelay.checked) {
+                    console.log("Activated")
+                    feedbackDelay.delayTime = "4n";
+                    feedbackDelay.feedback = delayVal * 100;
+                    feedbackDelay.wet.value = 1;
+                    document.getElementById("delayrange").value = delayVal;
+                
+                } else {
+                    feedbackDelay.wet.value = 0;
+                    document.getElementById("delayrange").value = 0;
                 
                 }
-             
-
-
-
             }
         }
         canvasCtx.restore();
-
     }
-
     const hands = new Hands({
         locateFile: (file) => {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
