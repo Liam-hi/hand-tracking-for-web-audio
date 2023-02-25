@@ -12,16 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.4.9/Tone.min.js"></script>
-    <style>
-
-        
-
-    </style>
 </head>
-<body>
-    
+<body>  
     <div class="side-menu">
-        
         <h1 style="font-size: 1rem">Controller</h1>
         <hr class="thin">
         <h1>Distortion</h1>
@@ -54,20 +47,7 @@
                 <option value="ring">Ring</option>
             </select>
         </div>
-        
-<!--         <div class="container">
-            <p>Dampening controlled by</p>
-            <select name="reverb" id="optreverb">
-                <option value="thumb">Thumb</option>
-                <option value="index">Index</option>
-                <option value="middle">Middle</option>
-                <option value="ring">Ring</option>
-            </select>
-        </div> -->
         <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="reverbrange">
-        
-        
-        
         <hr class="thin">
         <h1>Pitch Shift</h1>
         <div class="container">
@@ -85,7 +65,6 @@
         </div>
         <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="pitchrange">
         <hr class="thin">
-
         <h1>Bitcrusher</h1>
         <div class="container">
             <p>Effect on/off</p>
@@ -118,40 +97,16 @@
         </div>
         <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="delayrange">
         <hr class="thin">
-        
-
-
- 
-        
-        <input type="checkbox" id="pitch">
-        <input type="checkbox" id="autowah">
-        <button onclick="objectTracking()">jsjsjs</button>
+    
+        <button onclick="objectTracking()">Start Application</button>
         <video class="input_video"> controls>
-            <source src="1.mp4" type="video/mp4">
-          </video> 
-<!--           <div id="slidecontainer">
-              x:
-            <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange">
-            <br>
-           y:  <input type="range" min="0" max="1" value="0.2" class="slider" step="0.01" id="myRange2">
-          </div> -->
+            <!-- <source src="1.mp4" type="video/mp4"> -->
+        </video> 
     
-    
-
-    
-
     </div>
     <div class="canvas">
         <canvas class="output_canvas"></canvas>
- 
     </div>
-        
-
-
-      <script>
-
-        
-      </script>
       <script src="main.js"></script>
 </body>
 </html>
