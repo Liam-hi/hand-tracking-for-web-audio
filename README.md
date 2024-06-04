@@ -16,3 +16,4 @@ Manipulate Web Audio with hand gesture.
 - Tested on Chrome and Firefox.
 
 
+<img width="815" alt="Screenshot 2024-06-04 at 02 55 38" src="https://github.com/Liam-hi/hand-tracking-for-web-audio/assets/74251943/fc3695c9-f463-4378-a8d6-506afc84ae84">
